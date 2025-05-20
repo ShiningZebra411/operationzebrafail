@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Hub</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      height: 100%;
+      overflow: auto;
+    }
+    nav {
+      background: #1a1a1a;
+      padding: 20px;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    }
+    nav h2 {
+      font-size: 20px;
+      margin-top: 0;
+    }
+    nav input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      border: none;
+    }
+    nav a {
+      display: block;
+      color: #00d8ff;
+      text-decoration: none;
+      margin: 8px 0;
+    }
+    main {
+      margin-left: 270px;
+      padding: 20px;
+    }
+    .game-section {
+      margin-bottom: 40px;
+    }
+    .fullscreen-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 9999;
+    }
+    .hidden {
+      display: none;
+    }
+    button.play-button {
+      padding: 10px 20px;
+      background: #00d8ff;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h2>Game Hub</h2>
+    <input type="text" id="searchInput" placeholder="Search games..." oninput="filterGames()">
+    <a href="#subway-surfers">Subway Surfers</a>
+    <a href="#yohoho">YoHoHo.io</a>
+    <a href="#retrobowl">Retro Bowl</a>
+    <a href="#soccer-random">Soccer Random</a>
+    <a href="#flappy-bird">Flappy Bird</a>
+  </nav>
+
+    <section id="subway-surfers" class="game-section" data-name="subway surfers">
+      <h2>Subway Surfers</h2>
+      <button class="play-button" onclick="openFullscreen('https://mathlessons.blog/classroom-59.html')">Play Fullscreen</button>
+    </section>
+
+    <section id="yohoho" class="game-section" data-name="yohoho io">
+      <h2>YoHoHo.io</h2>
+      <button class="play-button" onclick="openFullscreen('https://mathlessons.blog/classroom-2.html')">Play Fullscreen</button>
+    </section>
+
+    <section id="retrobowl" class="game-section" data-name="retro bowl">
+      <h2>Retro Bowl</h2>
+      <button class="play-button" onclick="openFullscreen('https://mathlessons.blog/classroom-1.html')">Play Fullscreen</button>
+    </section>
+
+  <iframe id="fullscreenGame" class="hidden fullscreen-iframe" allowfullscreen></iframe>
+
+  <script>
+    function filterGames() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const sections = document.querySelectorAll('.game-section');
+      const links = document.querySelectorAll('nav a');
+
+      sections.forEach(section => {
+        section.style.display = section.dataset.name.includes(input) ? '' : 'none';
+      });
+      links.forEach(link => {
+        link.style.display = link.textContent.toLowerCase().includes(input) ? '' : 'none';
+      });
+    }
+
+    function openFullscreen(url) {
+      const iframe = document.getElementById('fullscreenGame');
+      iframe.src = url;
+      iframe.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  </script>
+</body>
+</html>
